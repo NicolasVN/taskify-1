@@ -11,7 +11,6 @@ export function Register() {
         <TextInput placeholder="Senha" style={styles.Input} />
         <TextInput placeholder="Confirmar Senha" style={styles.Input} />
         <Button title="Enviar" />
-
       </View>
 
       <View>
