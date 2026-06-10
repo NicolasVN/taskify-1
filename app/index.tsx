@@ -1,18 +1,20 @@
 import { StyleSheet, View } from "react-native";
 import { Sign } from "./screens/sign";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "./constants/colors";
+import { Register } from "./screens/register";
 
 export default function Page() {
   return (
-    <View style={styles.container}>
-<Sign/>
-    </View>
-);
+    <SafeAreaView style={styles.container}>
+      <Sign />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-            backgroundColor: '#F3F4F6',
-
+    backgroundColor: colors.gray100,
   },
 });
