@@ -1,16 +1,20 @@
 import { colors } from "@/constants/colors";
-import { Slot } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, ImageSourcePropType, Image } from "react-native";
 
 interface TextButton {
   label: string;
+  icon: ImageSourcePropType;
 }
 
-export function ButtonLogin({ label }: TextButton) {
+export function ButtonLogin({ label, icon }: TextButton) {
   return (
     <View style={styles.Container}>
       <TouchableOpacity style={styles.ButtonSign}>
-        <Text style={styles.ButtonText}>{label}</Text>
+        <Image
+        source={icon}
+        style={styles.Icon}
+        />
+        <Text style={styles.Text}>{label}</Text>
       </TouchableOpacity>
 
     </View>
@@ -27,12 +31,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth:1,
-    borderColor: colors.gray300
+    borderColor: colors.gray300,
+    flexDirection: "row"
   },
 
-  ButtonText: {
+  Text: {
     color: colors.black,
         fontWeight: "bold"
 
   },
+  Icon: {
+    width: 20,
+    height:20,
+    marginRight:8
+  }
 });

@@ -1,32 +1,75 @@
 import { colors } from "@/constants/colors";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface InputTextProps {
-  label: string;
+  label?: string;
   placeholder: string;
+  icon?: keyof typeof Ionicons.glyphMap;
+  isPassword?: boolean;
 }
 
-export function InputText({ label, placeholder }: InputTextProps) {
+export function InputText({
+  label,
+  placeholder,
+  icon,
+  isPassword,
+}: InputTextProps) {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <View>
-      <Text style={styles.labelInput}>{label}</Text>
-      <TextInput placeholder={placeholder} style={styles.Input} />
+      {label && <Text style={styles.LabelInput}>{label}</Text>}
+
+      <View style={styles.InputContainer}>
+        {icon && <Ionicons name={icon} size={20} color={colors.gray500} />}
+
+        <TextInput
+          placeholder={placeholder}
+          placeholderTextColor={colors.gray400}
+          style={styles.Input}
+          secureTextEntry={isPassword && !showPassword}
+        />
+        {isPassword && (
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-outline" : "eye-off-outline"}
+              size={20}
+              color={colors.gray500}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  Input: {
+  InputContainer: {
     height: 50,
     borderRadius: 10,
-    backgroundColor: "#fff",
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    lineHeight: 1,
-    borderColor: colors.black,
-    color: colors.black
+    borderWidth: 1,
+    borderColor: colors.gray300,
+    backgroundColor: colors.white,
+    paddingHorizontal: 12,
+    flexDirection: "row",
+    alignItems: "center",
   },
-  labelInput: {
-    fontWeight: "bold"
-  }
+
+  Input: {
+    flex: 1,
+    marginLeft: 10,
+    color: colors.black,
+  },
+
+  LabelInput: {
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
 });

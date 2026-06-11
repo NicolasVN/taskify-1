@@ -1,13 +1,6 @@
 import { images } from "@/constants/assets";
 import { HeaderTitle } from "@react-navigation/elements";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../constants/colors";
 import { InputText } from "@/components/InputText";
 import { Button } from "@/components/Button";
@@ -16,37 +9,64 @@ import { Checkbox } from "@/components/CheckBox";
 
 export function Sign() {
   return (
-    <View style={{ flex: 1 }}>
-      <Image source={images.logoSign} style={styles.headerImage} />
+    <View style={styles.Screen}>
+      <Image source={images.logoSign} style={styles.HeaderImage} />
 
-      <View style={styles.container}>
+      <View style={styles.Container}>
         <HeaderTitle style={styles.Title}>Bem-Vindo(a)!</HeaderTitle>
-        <Text style={styles.TextCenter}>
+
+        <Text style={styles.Subtitle}>
           Faça login para continuar sua jornada com a gente
         </Text>
 
-        <View style={styles.columnOne}>
-          <InputText label="E-mail" placeholder="seuemail@exemplo.com" />
-          <InputText label="Senha" placeholder="Digite sua senha" />
+        <View style={styles.FormContainer}>
+          <InputText
+            label="E-mail"
+            placeholder="seuemail@exemplo.com"
+            icon="mail-outline"
+          />
+
+          <View style={styles.Spacer} />
+
+          <InputText
+            label="Senha"
+            placeholder="Digite sua senha"
+            icon="lock-closed-outline"
+            isPassword
+          />
+
           <View style={styles.FormActions}>
-          <Checkbox label="Lembrar de mim"/>
+            <Checkbox label="Lembrar de mim" />
+
             <TouchableOpacity>
-              <Text style={styles.TextForgot}>Esqueci minha senha</Text>
+              <Text style={styles.ForgotPasswordText}>Esqueci minha senha</Text>
             </TouchableOpacity>
           </View>
+
           <Button label="Entrar" />
-          <Text style={styles.TextCenter}>ou entre com</Text>
-          <View style={styles.DirectionRow}>
-            <ButtonLogin label="Google" />
-            <View style={styles.container} />
-            <ButtonLogin label="Apple" />
+
+          <View style={styles.Divider}>
+            <View style={styles.DividerLine} />
+
+            <Text style={styles.DividerText}>ou entre com</Text>
+
+            <View style={styles.DividerLine} />
+          </View>
+
+          <View style={styles.SocialButtonsRow}>
+            <ButtonLogin label="Google" icon={images.google} />
+
+            <View style={styles.SocialButtonSpacing} />
+
+            <ButtonLogin label="Apple" icon={images.apple} />
           </View>
         </View>
 
-        <View style={styles.DirectionRow}>
-          <Text>Não tem uma Conta?</Text>
+        <View style={styles.Row}>
+          <Text>Não tem uma conta?</Text>
+
           <TouchableOpacity>
-            <Text>Cadastrar-se</Text>
+            <Text style={styles.ForgotPasswordText}>Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -54,8 +74,18 @@ export function Sign() {
   );
 }
 const styles = StyleSheet.create({
-  container: {
+  Screen: {
+    flex: 1,
+  },
+
+  Container: {
+    flex: 1,
     margin: 20,
+  },
+
+  HeaderImage: {
+    width: "100%",
+    height: 210,
   },
 
   Title: {
@@ -64,51 +94,62 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  TextForgot: {
-    color: colors.purple600,
+  Subtitle: {
+    textAlign: "center",
+    color: colors.gray500,
   },
 
-  TextRemenber: {
-    color: colors.gray500,
+  FormContainer: {
     flex: 1,
-  },
-
-  bottomText: {
-    color: colors.gray500,
+    marginTop: 50,
   },
 
   FormActions: {
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginVertical: 15,
-    alignItems: "center"
   },
 
-  ButtonSign: {
-    height: 50,
-    backgroundColor: colors.purple700,
-    borderRadius: 12,
+  ForgotPasswordText: {
+    color: colors.purple600,
+    fontWeight: "bold",
+  },
+
+  Row: {
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
+  },
+
+  SocialButtonsRow: {
+    flexDirection: "row",
     justifyContent: "center",
   },
 
-  ButtonText: {
-    color: colors.white,
+  SocialButtonSpacing: {
+    width: 10,
   },
 
-  DirectionRow: {
+  Divider: {
     flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
   },
 
-  headerImage: {
-    width: "100%",
-    height: 210,
+  DividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.gray300,
   },
 
-  TextCenter: {
-    textAlign: "center",
+  DividerText: {
+    marginHorizontal: 12,
+    color: colors.gray500,
+    fontSize: 14,
   },
 
-  columnOne: {
-    marginVertical: 50,
+  Spacer: {
+    height: 10,
   },
 });

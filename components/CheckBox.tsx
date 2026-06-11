@@ -1,3 +1,4 @@
+import { colors } from "@/constants/colors";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -23,7 +24,7 @@ export function Checkbox({ label }: TextCheckBox) {
         {checked && <Text>✓</Text>}
       </View>
 
-      <Text>{label}</Text>
+      <Text style={styles.TextCheck}>{label}</Text>
     </TouchableOpacity>
     </View>
   );
@@ -47,4 +48,7 @@ flex:1
     alignItems: "center",
     marginRight: 8,
   },
+  TextCheck: {
+    color: colors.gray500
+  }
 });
