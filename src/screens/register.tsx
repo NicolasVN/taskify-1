@@ -1,25 +1,30 @@
 import { images } from "@/constants/assets";
 import { HeaderTitle } from "@react-navigation/elements";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../constants/colors";
-import { InputText } from "@/components/InputText";
-import { Button } from "@/components/Button";
-import { ButtonLogin } from "@/components/ButtonLogin";
-import { Checkbox } from "@/components/CheckBox";
+import { colors } from "@/constants/colors";
+import { InputText } from "../components/InputText";
+import { Button } from "../components/Button";
+import { ButtonLogin } from "../components/ButtonLogin";
+import { Checkbox } from "../components/CheckBox";
 
-export function Sign() {
+export function Register() {
   return (
     <View style={styles.Screen}>
-      <Image source={images.logoSign} style={styles.HeaderImage} />
+      <Image source={images.logo} style={styles.HeaderImage} />
 
       <View style={styles.Container}>
-        <HeaderTitle style={styles.Title}>Bem-Vindo(a)!</HeaderTitle>
+        <HeaderTitle style={styles.Title}>Criar conta</HeaderTitle>
 
-        <Text style={styles.Subtitle}>
-          Faça login para continuar sua jornada com a gente
-        </Text>
+        <Text style={styles.Subtitle}>Preencha os dados para começar</Text>
 
         <View style={styles.FormContainer}>
+          <InputText
+            label="Nome completo"
+            placeholder="Seu nome completo"
+            icon="person-outline"
+          />
+          <View style={styles.Spacer} />
+
           <InputText
             label="E-mail"
             placeholder="seuemail@exemplo.com"
@@ -34,16 +39,18 @@ export function Sign() {
             icon="lock-closed-outline"
             isPassword
           />
+          <View style={styles.Spacer} />
 
-          <View style={styles.FormActions}>
-            <Checkbox label="Lembrar de mim" />
-
-            <TouchableOpacity>
-              <Text style={styles.ForgotPasswordText}>Esqueci minha senha</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Button label="Entrar" />
+          <InputText
+            label="Confirmar senha"
+            placeholder="Confirme sua senha"
+            icon="lock-closed-outline"
+            isPassword
+          />
+<View style={styles.Spacer}>
+          <Checkbox label="Aceito os Termos de Uso e a Política de Privacidade" />
+</View>
+          <Button label="Cadastrar" />
 
           <View style={styles.Divider}>
             <View style={styles.DividerLine} />
@@ -63,10 +70,10 @@ export function Sign() {
         </View>
 
         <View style={styles.Row}>
-          <Text>Não tem uma conta?</Text>
+          <Text>Já tem uma conta?</Text>
 
-          <TouchableOpacity>
-            <Text style={styles.ForgotPasswordText}>Cadastrar-se</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Sign")}>
+            <Text style={styles.ForgotPasswordText}>Entrar</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -76,6 +83,7 @@ export function Sign() {
 const styles = StyleSheet.create({
   Screen: {
     flex: 1,
+    marginTop:20
   },
 
   Container: {
@@ -85,7 +93,12 @@ const styles = StyleSheet.create({
 
   HeaderImage: {
     width: "100%",
-    height: 210,
+    height: 150,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  ContainerImage: {
+    width:100
   },
 
   Title: {
@@ -100,15 +113,7 @@ const styles = StyleSheet.create({
   },
 
   FormContainer: {
-    flex: 1,
     marginTop: 50,
-  },
-
-  FormActions: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: 15,
   },
 
   ForgotPasswordText: {
@@ -119,7 +124,8 @@ const styles = StyleSheet.create({
   Row: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-end",
+    flex:1,
   },
 
   SocialButtonsRow: {
@@ -150,6 +156,6 @@ const styles = StyleSheet.create({
   },
 
   Spacer: {
-    height: 10,
+    marginVertical: 10,
   },
 });
